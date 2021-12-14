@@ -1,0 +1,21 @@
+[package]
+name = "Rua"
+description = "Rua is a simplified, rust-implementation of the infamous D3vd/Meme_API that allows anyone to fetch a quick post from a subreddit."
+authors = ["Shindou Mihou"]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.0.0-beta.14"
+reqwest = { version = "0.11.7", features = ["multipart", "json"] }
+serde_json = "1.0.73"
+serde = { version = "1.0.131", features = ["derive"] }
+cached = "0.26.2"
+dotenv = "0.15.0"
+dotenv_codegen = "0.15.0"
+rand = "0.8.4"
+chrono = "0.4.19"
+colored = "2.0.0"
