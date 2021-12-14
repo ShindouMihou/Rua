@@ -13,7 +13,7 @@ with a data structure such as this:
     "image":"https://i.redd.it/amkv5hicqc581.jpg",
     "ups":4054,
     "downs":0,
-    "over_18":false,
+    "nsfw":false,
     "author":"raveenbikha"
   }
 }
