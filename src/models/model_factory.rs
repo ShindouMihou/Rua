@@ -13,7 +13,7 @@ pub struct RuaMetadata {
     image: Option<String>,
     ups: i32,
     downs: i32,
-    #[serde(rename = "over_18")]
+    #[serde(rename(deserialize = "over_18", serialize = "nsfw"))]
     nsfw: bool,
     author: String,
 }
