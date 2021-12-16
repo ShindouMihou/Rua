@@ -4,6 +4,7 @@ use reqwest::Error;
 use crate::models::{RuaPost, SubredditResponse};
 
 use crate::token::request;
+use crate::env::get;
 
 pub fn serialize_from_json(json: String) -> Vec<RuaPost> {
     serde_json::from_str::<SubredditResponse>(&*json)
@@ -24,7 +25,7 @@ pub async fn get_posts(subreddit: String) -> Result<String, Error> {
             "https://oauth.reddit.com/r/{}/hot.json?limit=100",
             &subreddit
         ))
-        .header("User-Agent", dotenv!("REDDIT_USER_AGENT"))
+        .header("User-Agent", env::get("REDDIT_USER_AGENT").unwrap())
         .header("Accept", "*/*")
         .header("Cache-Control", "no-cache")
         .header("Host", "oauth.reddit.com")

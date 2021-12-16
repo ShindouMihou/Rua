@@ -9,6 +9,7 @@ use actix_web::middleware::Logger;
 use chrono::Local;
 use colored::Colorize;
 use rand::seq::{SliceRandom};
+use crate::env::get;
 
 #[path = "reddit/subreddit.rs"]
 mod subreddit;
@@ -16,6 +17,8 @@ mod subreddit;
 mod token;
 #[path = "models/model_factory.rs"]
 mod models;
+#[path = "internals/env.rs"]
+mod env;
 
 #[get("/get/{subreddit}/")]
 async fn get_subreddit_single(
@@ -42,7 +45,7 @@ async fn main() -> std::io::Result<()> {
     );
     println!(
         "You can now start requesting at configured endpoint: {}",
-        dotenv!("SERVER_BIND")
+        env::get("SERVER_BIND").unwrap()
     );
 
     HttpServer::new(|| {
