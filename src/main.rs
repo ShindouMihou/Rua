@@ -37,6 +37,22 @@ async fn get_subreddit_single(
     )
 }
 
+#[get("/")]
+async fn get_index(
+    request: HttpRequest
+) -> impl Responder {
+    println!(
+        "{}: [event=get_index, ip={}]",
+        Local::now().to_string(),
+        request.connection_info().realip_remote_addr().unwrap_or("???"),
+    );
+
+    HttpResponse::Ok().json({
+        message: "Rua, simplified reddit aggregation service.",
+        endpoints: "/get/{subreddit}",
+    });
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     println!(
@@ -51,9 +67,9 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new().wrap(Logger::default()).wrap(Logger::new(
             "Received request from %a that took %D with response status %s. [time=%t]",
-        )).service(get_subreddit_single)
+        )).service(get_subreddit_single).service(get_index)
     })
-    .bind(dotenv!("SERVER_BIND"))?
+    .bind(env::get("SERVER_BIND").unwrap())?
     .run()
     .await
 }
