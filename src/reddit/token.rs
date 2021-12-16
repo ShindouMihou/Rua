@@ -2,12 +2,13 @@ use cached::proc_macro::cached;
 use chrono::Local;
 use reqwest::Error;
 use crate::models::TokenResponse;
+use crate::env::get;
 
 #[cached(time = 3600, result = true, sync_writes = true)]
 pub async fn request() -> Result<String, Error> {
     let response = reqwest::Client::new()
         .post("https://www.reddit.com/api/v1/access_token")
-        .header("User-Agent", env::get("REDDIT_USER_AGENT").unwrap())
+        .header("User-Agent", get("REDDIT_USER_AGENT").unwrap())
         .header("Accept", "*/*")
         .header("Cache-Control", "no-cache")
         .header("Host", "www.reddit.com")
