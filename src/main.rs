@@ -1,9 +1,6 @@
 // This is disabled because I am too lazy to change crate name.
 #![allow(non_snake_case)]
 
-#[macro_use]
-extern crate dotenv_codegen;
-
 use actix_web::{App, HttpRequest, HttpResponse, HttpServer, Responder, get, web};
 use actix_web::middleware::Logger;
 use chrono::Local;
@@ -47,10 +44,8 @@ async fn get_index(
         request.connection_info().realip_remote_addr().unwrap_or("???"),
     );
 
-    HttpResponse::Ok().json({
-        message: "Rua, simplified reddit aggregation service.",
-        endpoints: "/get/{subreddit}",
-    });
+    HttpResponse::Ok().content_type("application/json")
+        .body("{\"message\":\"Rua, a simplified Reddit aggregator.\",\"github\":\"https://github.com/ShindouMihou/Rua\",\"endpoint\":\"/get/{subreddit}\"")
 }
 
 #[actix_web::main]

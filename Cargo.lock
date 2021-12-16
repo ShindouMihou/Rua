@@ -10,8 +10,6 @@ dependencies = [
  "cached",
  "chrono",
  "colored",
- "dotenv",
- "dotenv_codegen",
  "rand",
  "reqwest",
  "serde",
