@@ -25,7 +25,7 @@ pub async fn get_posts(subreddit: String) -> Result<String, Error> {
             "https://oauth.reddit.com/r/{}/hot.json?limit=100",
             &subreddit
         ))
-        .header("User-Agent", env::get("REDDIT_USER_AGENT").unwrap())
+        .header("User-Agent", get("REDDIT_USER_AGENT").unwrap())
         .header("Accept", "*/*")
         .header("Cache-Control", "no-cache")
         .header("Host", "oauth.reddit.com")

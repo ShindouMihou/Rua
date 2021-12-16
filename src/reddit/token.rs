@@ -14,7 +14,7 @@ pub async fn request() -> Result<String, Error> {
         .header("Content-Type", "application/x-www-form-urlencoded")
         .header("Accept-Encoding", "gzip, deflate")
         .multipart(reqwest::multipart::Form::new().text("grant_type", "client_credentials"))
-        .basic_auth(env::get("REDDIT_ID").unwrap(), Some(env::get("REDDIT_SECRET").unwrap()))
+        .basic_auth(get("REDDIT_ID").unwrap(), Some(get("REDDIT_SECRET").unwrap()))
         .send()
         .await?;
 

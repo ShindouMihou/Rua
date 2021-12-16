@@ -6,7 +6,6 @@ use actix_web::middleware::Logger;
 use chrono::Local;
 use colored::Colorize;
 use rand::seq::{SliceRandom};
-use crate::env::get;
 
 #[path = "reddit/subreddit.rs"]
 mod subreddit;
