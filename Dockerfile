@@ -33,11 +33,11 @@ RUN echo '/usr/local/lib' >> /etc/ld.so.conf
 RUN cat /etc/ld.so.conf
 RUN ldconfig
 RUN echo 'export LD_LIBRARY_PATH=/usr/local/lib' >> ~/.bash_profile && . ~/.bash_profile
-RUN openssl version
-
-FROM rustbian:latest
 WORKDIR app
 COPY --from=builder /app/target/release/Rua /usr/local/bin
 EXPOSE 3921
 ENV SERVER_BIND=0.0.0.0:3921
 ENTRYPOINT ["/usr/local/bin/Rua"]
+
+
+
